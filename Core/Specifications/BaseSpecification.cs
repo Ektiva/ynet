@@ -7,14 +7,14 @@ namespace Core.Specifications
 {
     public class BaseSpecification<T> : ISpecification<T>
     {
-        //    public BaseSpecification()
-        //    {
-        //    }
+        public BaseSpecification()
+        {
+        }
 
-        //    public BaseSpecification(Expression<Func<T, bool>> criteria)
-        //    {
-        //        Criteria = criteria;
-        //    }
+        public BaseSpecification(Expression<Func<T, bool>> criteria)
+        {
+            Criteria = criteria;
+        }
 
         public Expression<Func<T, bool>> Criteria { get; }
 
@@ -31,10 +31,10 @@ namespace Core.Specifications
 
         //    public bool IsPagingEnabled { get; private set; }
 
-        //    protected void AddInclude(Expression<Func<T, object>> includeExpression)
-        //    {
-        //        Includes.Add(includeExpression);
-        //    }
+        protected void AddInclude(Expression<Func<T, object>> includeExpression)
+        {
+            Includes.Add(includeExpression);
+        }
 
         //    protected void AddOrderBy(Expression<Func<T, object>> orderByExpression)
         //    {

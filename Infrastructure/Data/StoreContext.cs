@@ -24,7 +24,7 @@ namespace Infrastructure.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            /*if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+            if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {
                 foreach (var entityType in modelBuilder.Model.GetEntityTypes())
                 {
@@ -37,13 +37,13 @@ namespace Infrastructure.Data
                         modelBuilder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
                     }
 
-                    foreach (var property in dateTimeProperties)
-                    {
-                        modelBuilder.Entity(entityType.Name).Property(property.Name)
-                            .HasConversion(new DateTimeOffsetToBinaryConverter());
-                    }
+                    //foreach (var property in dateTimeProperties)
+                    //{
+                    //    modelBuilder.Entity(entityType.Name).Property(property.Name)
+                    //        .HasConversion(new DateTimeOffsetToBinaryConverter());
+                    //}
                 }
-            }*/
+            }
         }
 
     }

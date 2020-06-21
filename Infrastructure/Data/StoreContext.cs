@@ -13,6 +13,11 @@ namespace Infrastructure.Data
         public StoreContext(DbContextOptions<StoreContext> options) : base(options) { }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Category> Categorys { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<Size> Sizes { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         //public DbSet<Order> Orders { get; set; }

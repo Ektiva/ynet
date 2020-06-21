@@ -1,0 +1,67 @@
+[
+  {
+    "Id": 1,
+    "Name": "S",
+	"ItemId": 1
+  },
+  {
+    "Id": 2,
+    "Name": "M",
+	"ItemId": 1
+  },
+  {
+    "Id": 3,
+    "Name": "L",
+	"ItemId": 1
+  },
+  {
+    "Id": 4,
+    "Name": "XL",
+	"ItemId": 1
+  },
+  {
+    "Id": 5,
+    "Name": "24''",
+	"ItemId": 2
+  },
+  {
+    "Id": 6,
+    "Name": "28''",
+	"ItemId": 2
+  },
+  {
+    "Id": 7,
+    "Name": "32''",
+	"ItemId": 2
+  },
+  {
+    "Id": 8,
+    "Name": "14''",
+	"ItemId": 3
+  },
+  {
+    "Id": 9,
+    "Name": "22''",
+	"ItemId": 3
+  },
+  {
+    "Id": 10,
+    "Name": "#1D1D1D",
+	"ItemId": 3
+  },
+  {
+    "Id": 11,
+    "Name": "13.3''",
+	"ItemId": 4
+  },
+  {
+    "Id": 12,
+    "Name": "15.4''",
+	"ItemId": 4
+  },
+  {
+    "Id": 13,
+    "Name": "17''",
+	"ItemId": 4
+  }
+ ]

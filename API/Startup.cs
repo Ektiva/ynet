@@ -8,6 +8,8 @@ using AutoMapper;
 using API.Helpers;
 using API.Middleware;
 using API.Extensions;
+using Microsoft.Azure.ServiceBus;
+using API.Publisher;
 
 namespace API
 {
@@ -51,10 +53,26 @@ namespace API
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddDbContext<StoreContext>(x =>
             {
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
+            // For Service Bus
+            //Topic
+            services.AddSingleton<ITopicClient>(x =>
+                new TopicClient(
+                    connectionString: "Endpoint=sb://ektiva-first-servbus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=3XRjXGzrhawdWzo+pTyBekaWAENix+CF4o6aJo+/lPQ=",
+                    entityPath: "exampletopic"));
+            // Queue
+            //services.AddSingleton<IQueueClient>(x => 
+            //    new QueueClient(
+            //        connectionString: "Endpoint=sb://ektiva-first-servbus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=3XRjXGzrhawdWzo+pTyBekaWAENix+CF4o6aJo+/lPQ=",
+            //        entityPath: "examplequeue"));
+            services.AddSingleton<MessagePublisher>();
 
             // For later
             //services.AddSingleton<IConnectionMultiplexer>(c => {

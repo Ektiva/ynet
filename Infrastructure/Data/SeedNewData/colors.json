@@ -1,0 +1,87 @@
+[
+  {
+    "Id": 7,
+    "Name": "#5C6BC0",
+	"ItemId": 7
+  },
+  {
+    "Id": 8,
+    "Name": "#66BB6A",
+	"ItemId": 7
+  },
+  {
+    "Id": 9,
+    "Name": "#90A4AE",
+	"ItemId": 7
+  },
+  {
+    "Id": 10,
+    "Name": "#1D1D1D",
+	"ItemId": 8
+  },
+  {
+    "Id": 11,
+    "Name": "#DADADA",
+	"ItemId": 8
+  },
+  {
+    "Id": 12,
+    "Name": "#597087",
+	"ItemId": 8
+  },
+  {
+    "Id": 13,
+    "Name": "#474543",
+	"ItemId": 9
+  },
+  {
+    "Id": 14,
+    "Name": "#8B8B8B",
+	"ItemId": 9
+  },
+  {
+    "Id": 15,
+    "Name": "#FFFFFF",
+	"ItemId": 9
+  },
+  {
+    "Id": 16,
+    "Name": "#1D1D1D",
+	"ItemId": 9
+  },
+  {
+    "Id": 17,
+    "Name": "#4C4C4C",
+	"ItemId": 10
+  },
+  {
+    "Id": 18,
+    "Name": "#B6B7B9",
+	"ItemId": 10
+  },
+  {
+    "Id": 19,
+    "Name": "#1E1B00",
+	"ItemId": 11
+  },
+  {
+    "Id": 20,
+    "Name": "#898E8B",
+	"ItemId": 11
+  },
+  {
+    "Id": 21,
+    "Name": "#464646",
+	"ItemId": 12
+  },
+  {
+    "Id": 22,
+    "Name": "#F3F3F3",
+	"ItemId": 12
+  },
+  {
+    "Id": 23,
+    "Name": "#E6E6E6",
+	"ItemId": 12
+  }
+ ]

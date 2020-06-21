@@ -1,5 +1,7 @@
 ﻿using Core.Entities;
+using Core.Helpers;
 using Microsoft.Extensions.Logging;
+using Microsoft.SqlServer.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -69,6 +71,94 @@ namespace Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
 
+
+
+                //if (context.Categorys.Count() < 2)
+                //{
+                //    //var productsData =
+                //    //    File.ReadAllText(path + @"/Data/SeedData/products.json");'
+                //    var categorysData =
+                //        File.ReadAllText("../Infrastructure/Data/SeedNewData/categories.json");
+
+                //    var categorys = JsonSerializer.Deserialize<List<Category>>(categorysData);
+
+                //    foreach (var item in categorys)
+                //    {
+                //        Category category = setCategory(context, item);
+
+                //        context.Categorys.Add(category);
+                //    }
+
+                //    await context.SaveChangesAsync();
+                //}
+
+                if (context.Items.Count() < 31)
+                {
+                    //var productsData =
+                    //    File.ReadAllText(path + @"/Data/SeedData/products.json");'
+                    var itemsData =
+                        File.ReadAllText("../Infrastructure/Data/SeedNewData/items.json");
+
+                    var items = JsonSerializer.Deserialize<List<Item>>(itemsData);
+
+                    foreach (var item in items)
+                    {
+                        context.Items.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.Colors.Any())
+                {
+                    //var productsData =
+                    //    File.ReadAllText(path + @"/Data/SeedData/products.json");'
+                    var colorsData =
+                        File.ReadAllText("../Infrastructure/Data/SeedNewData/colors.json");
+
+                    var colors = JsonSerializer.Deserialize<List<Color>>(colorsData);
+
+                    foreach (var item in colors)
+                    {
+                        context.Colors.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.Sizes.Any())
+                {
+                    //var productsData =
+                    //    File.ReadAllText(path + @"/Data/SeedData/products.json");'
+                    var sizesData =
+                        File.ReadAllText("../Infrastructure/Data/SeedNewData/sizes.json");
+
+                    var sizes = JsonSerializer.Deserialize<List<Size>>(sizesData);
+
+                    foreach (var item in sizes)
+                    {
+                        context.Sizes.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (context.Images.Count() < 49)
+                {
+                    //var productsData =
+                    //    File.ReadAllText(path + @"/Data/SeedData/products.json");'
+                    var imagesData =
+                        File.ReadAllText("../Infrastructure/Data/SeedNewData/images.json");
+
+                    var images = JsonSerializer.Deserialize<List<Image>>(imagesData);
+
+                    foreach (var item in images)
+                    {
+                        context.Images.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
                 //if (!context.DeliveryMethods.Any())
                 //{
                 //    var dmData =
@@ -89,6 +179,31 @@ namespace Infrastructure.Data
                 var logger = loggerFactory.CreateLogger<StoreContextSeed>();
                 logger.LogError(ex.Message);
             }
+        }
+
+        private static Category setCategory(StoreContext _context,  Category category)
+        {
+            var parentNode = new byte[2147483591];
+            var lastChild = new Category();
+
+            parentNode = _context.Categorys.FirstOrDefault(x => x.Name == category.CategoryUp).Node;
+            
+            try
+            {
+                lastChild = _context.Categorys.Where(x => x.CategoryUp == category.CategoryUp)
+                    .OrderByDescending(x => x.Node)
+                    .FirstOrDefault();
+
+                SqlHierarchyId lastSqlNode = HierarchyExtensions.ToSqlHierarchyId(lastChild.Node);
+
+                category.Node = HierarchyExtensions.ToByteArray(HierarchyExtensions.ToSqlHierarchyId(parentNode).GetDescendant(lastSqlNode, new SqlHierarchyId()));
+            }
+            catch (Exception ex)
+            {
+                category.Node = HierarchyExtensions.ToByteArray(HierarchyExtensions.ToSqlHierarchyId(parentNode).GetDescendant(new SqlHierarchyId(), new SqlHierarchyId()));
+            }
+
+            return category;
         }
     }
 }

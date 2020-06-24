@@ -10,6 +10,7 @@ using API.Middleware;
 using API.Extensions;
 using Microsoft.Azure.ServiceBus;
 using API.Publisher;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -61,6 +62,13 @@ namespace API
             {
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddSingleton<IConnectionMultiplexer>(c => {
+                var configuration = ConfigurationOptions.Parse(_config
+                    .GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
+
             // For Service Bus
             //Topic
             services.AddSingleton<ITopicClient>(x =>
@@ -73,6 +81,8 @@ namespace API
             //        connectionString: "Endpoint=sb://ektiva-first-servbus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=3XRjXGzrhawdWzo+pTyBekaWAENix+CF4o6aJo+/lPQ=",
             //        entityPath: "examplequeue"));
             services.AddSingleton<MessagePublisher>();
+
+            services.AddApplicationInsightsTelemetry();
 
             // For later
             //services.AddSingleton<IConnectionMultiplexer>(c => {

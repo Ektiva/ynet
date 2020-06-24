@@ -11,28 +11,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class BasketController : BaseApiController
+    public class Basket1Controller : BaseApiController
     {
-        private readonly IBasketRepository<CustomerBasket> _basketRepository;
+        private readonly IBasketRepository<CustomerBasket1> _basketRepository;
         private readonly IMapper _mapper;
-        public BasketController(IBasketRepository<CustomerBasket> basketRepository, IMapper mapper)
+        public Basket1Controller(IBasketRepository<CustomerBasket1> basketRepository, IMapper mapper)
         {
             _mapper = mapper;
             _basketRepository = basketRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<CustomerBasket>> GetBasketById(string id)
+        public async Task<ActionResult<CustomerBasket1>> GetBasketById(string id)
         {
             var basket = await _basketRepository.GetBasketAsync(id);
 
-            return Ok(basket ?? new CustomerBasket(id));
+            return Ok(basket ?? new CustomerBasket1(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
+        public async Task<ActionResult<CustomerBasket1>> UpdateBasket(CustomerBasket1 basket)
         {
-            //var customerBasket = _mapper.Map<CustomerBasketDto, CustomerBasket>(basket);
+            //var customerBasket = _mapper.Map<CustomerBasket1Dto, CustomerBasket1>(basket);
 
             var updatedBasket = await _basketRepository.UpdateBasketAsync(basket);
 

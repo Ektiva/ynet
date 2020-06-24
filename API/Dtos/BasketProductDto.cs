@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Dtos
 {
-    public class BasketItemDto
+    public class BasketProductDto
     {
         [Required]
         public int Id { get; set; }
@@ -28,18 +28,7 @@ namespace API.Dtos
         [Required]
         public string Brand { get; set; }
 
-        // public string Description { get; set; }
-        public long RatingsCount { get; set; }
-        public long RatingsValue { get; set; }
         [Required]
-        public long availibilityCount { get; set; }
-        public long cartCount { get; set; }
-        public List<string> Color { get; set; }
-        public List<string> Size { get; set; }
-        [Required]
-        public long Weight { get; set; }
-        [Required]
-        public string Category { get; set; }
-        public virtual ICollection<List<string>> Images { get; set; }
+        public string Type { get; set; }
     }
 }

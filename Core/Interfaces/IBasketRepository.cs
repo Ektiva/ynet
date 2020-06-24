@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IBasketRepository
+    public interface IBasketRepository<T> where T : BaseEntity1
     {
-        Task<CustomerBasket> GetBasketAsync(string basketId);
-        Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket);
+        Task<T> GetBasketAsync(string basketId);
+        Task<T> UpdateBasketAsync(T basket);
         Task<bool> DeleteBasketAsync(string basketId);
     }
 }

@@ -45,6 +45,51 @@ namespace API.Controllers
             return toReturn;
         }
 
+        // GET: api/Category/GetCategory/level
+        [HttpGet("{GetCategory}/{level}")]
+        public async Task<ActionResult<IEnumerable<CategoryToReturnDto>>> GetCategory(int id, int parentId)
+        {
+            var categorys = await _context.Categorys.Where(x => (x.Name != "Root" && x.Name != "All Categories" && x.Name != "Motors")).ToListAsync();
+            var toReturn = new List<CategoryToReturnDto>();
+
+            if (parentId != 0)
+            {
+                var parent = await _context.Categorys.FindAsync(parentId);
+                var parentNode = HierarchyExtensions.ToSqlHierarchyId(parent.Node);
+
+                foreach (var item in categorys)
+                {
+                    var node = HierarchyExtensions.ToSqlHierarchyId(item.Node);
+                    if (node.GetLevel().ToSqlInt32() == id && node.GetAncestor(1) == parentNode)
+                    {
+                        var alt = new CategoryToReturnDto();
+                        alt.Id = item.Id;
+                        alt.Name = item.Name;
+                        alt.hasSubCategory = item.hasSubCategory;
+                        alt.parentId = item.parentId;
+                        toReturn.Add(alt);
+                    }
+                }
+            }else
+            {
+                foreach (var item in categorys)
+                {
+                    var node = HierarchyExtensions.ToSqlHierarchyId(item.Node);
+                    if (node.GetLevel().ToSqlInt32() == id)
+                    {
+                        var alt = new CategoryToReturnDto();
+                        alt.Id = item.Id;
+                        alt.Name = item.Name;
+                        alt.hasSubCategory = item.hasSubCategory;
+                        alt.parentId = item.parentId;
+                        toReturn.Add(alt);
+                    }
+                }
+            }
+            
+            return toReturn;
+        }
+
         // GET: api/Category/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
@@ -61,16 +106,16 @@ namespace API.Controllers
             return category;
         }
 
-        // GET: api/Category/GetLastChild/Root
-        [HttpGet("{GetLastChild}/{name}")]
-        public async Task<ActionResult<Category>> GetLastChild(string name)
-        {
-            var listNode = _context.Categorys.Where(x => x.CategoryUp == name)
-                .OrderByDescending(x => x.Node)
-                .FirstOrDefault();
+        //// GET: api/Category/GetLastChild/Root
+        //[HttpGet("{GetLastChild}/{name}")]
+        //public async Task<ActionResult<Category>> GetLastChild(string name)
+        //{
+        //    var listNode = _context.Categorys.Where(x => x.CategoryUp == name)
+        //        .OrderByDescending(x => x.Node)
+        //        .FirstOrDefault();
 
-            return listNode;
-        }
+        //    return listNode;
+        //}
 
         // POST: api/Category
         [HttpPost]

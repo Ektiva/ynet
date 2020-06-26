@@ -11,6 +11,7 @@ using API.Extensions;
 using Microsoft.Azure.ServiceBus;
 using API.Publisher;
 using StackExchange.Redis;
+using Infrastructure.Identity;
 
 namespace API
 {
@@ -63,6 +64,11 @@ namespace API
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddDbContext<AppIdentityDbContext>(x =>
+            {
+                x.UseSqlite(_config.GetConnectionString("IdentityConnection"));
+            });
+
             services.AddSingleton<IConnectionMultiplexer>(c => {
                 var configuration = ConfigurationOptions.Parse(_config
                     .GetConnectionString("Redis"), true);
@@ -93,8 +99,8 @@ namespace API
 
             services.AddApplicationServices();
 
-            //services.AddIdentityServices(_config);
-            
+            services.AddIdentityServices(_config);
+
             services.AddSwaggerDocumentation();
 
             services.AddCors(opt =>
@@ -137,7 +143,7 @@ namespace API
 
             app.UseCors("CorsPolicy");
 
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwaggerDocumention();

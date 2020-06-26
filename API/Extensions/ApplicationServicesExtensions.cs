@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Core.Interfaces;
 using Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Infrastructure.Services;
 
 namespace API.Extensions
 {
@@ -15,7 +16,7 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             // services.AddSingleton<IResponseCacheService, ResponseCacheService>();
-            // services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ITokenService, TokenService>();
             // services.AddScoped<IOrderService, OrderService>();
             // services.AddScoped<IPaymentService, PaymentService>();
             // services.AddScoped<IUnitOfWork, UnitOfWork>();

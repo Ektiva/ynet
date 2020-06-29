@@ -34,12 +34,12 @@ namespace API.Dtos
         [Required]
         public long availibilityCount { get; set; }
         public long cartCount { get; set; }
-        public List<string> Color { get; set; }
-        public List<string> Size { get; set; }
+        //public List<string> Color { get; set; }
+        //public List<string> Size { get; set; }
         [Required]
         public long Weight { get; set; }
         [Required]
         public string Category { get; set; }
-        public virtual ICollection<List<string>> Images { get; set; }
+        //public virtual ICollection<List<string>> Images { get; set; }
     }
 }

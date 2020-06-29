@@ -15,6 +15,8 @@ namespace Core.Entities
         public long RatingsValue { get; set; }
         public long availibilityCount { get; set; }
         public long cartCount { get; set; }
+        public string TechnicalDescription { get; set; }
+        public string AdditionalInformation { get; set; }
         public List<Color> Color { get; set; }
         public List<Size> Size { get; set; }
         public long Weight { get; set; }
@@ -23,5 +25,7 @@ namespace Core.Entities
         public ProductBrand ProductBrand { get; set; }
         public int ProductBrandId { get; set; }
         public virtual ICollection<Image> Images { get; set; }
+        public List<Review> Review { get; set; }
+        public string PictureUrl { get; set; }
     }
 }

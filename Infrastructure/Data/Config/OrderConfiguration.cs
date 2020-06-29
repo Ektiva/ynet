@@ -20,7 +20,7 @@ namespace Infrastructure.Data.Config
                     o => o.ToString(),
                     o => (OrderStatus)Enum.Parse(typeof(OrderStatus), o)
                 );
-
+            // When deleting an order deleting the related order item in the same time
             builder.HasMany(o => o.OrderItems).WithOne().OnDelete(DeleteBehavior.Cascade);
         }
     }

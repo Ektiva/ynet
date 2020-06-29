@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,11 +18,14 @@ namespace API.Dtos
         public long RatingsValue { get; set; }
         public long availibilityCount { get; set; }
         public long cartCount { get; set; }
+        public string TechnicalDescription { get; set; }
+        public string AdditionalInformation { get; set; }
         public List<string> Color { get; set; }
         public List<string> Size { get; set; }
         public long Weight { get; set; }
         public int CategoryId { get; set; }
         public string BrandName { get; set; }
         public List<ImageToReturnDto> Images { get; set; }
+        public List<ReviewDto> Reviews { get; set; }
     }
 }

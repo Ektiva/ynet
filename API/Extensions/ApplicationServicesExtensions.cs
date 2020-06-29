@@ -8,6 +8,7 @@ using Core.Interfaces;
 using Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Services;
+using Infrastructure.Data;
 
 namespace API.Extensions
 {
@@ -17,9 +18,10 @@ namespace API.Extensions
         {
             // services.AddSingleton<IResponseCacheService, ResponseCacheService>();
             services.AddScoped<ITokenService, TokenService>();
-            // services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderService1, OrderService1>();
             // services.AddScoped<IPaymentService, PaymentService>();
-            // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IBasketRepository, BasketRepository>();

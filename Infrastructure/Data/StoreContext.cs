@@ -1,5 +1,7 @@
 ﻿using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +20,14 @@ namespace Infrastructure.Data
         public DbSet<Image> Images { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Size> Sizes { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
-        //public DbSet<Order> Orders { get; set; }
-        //public DbSet<OrderItem> OrderItems { get; set; }
-        //public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order1> Orders1 { get; set; }
+        public DbSet<OrderItem1> OrderItems1 { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,7 +38,8 @@ namespace Infrastructure.Data
             {
                 foreach (var entityType in modelBuilder.Model.GetEntityTypes())
                 {
-                    var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(decimal));
+                    var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType 
+                    == typeof(decimal));
                     var dateTimeProperties = entityType.ClrType.GetProperties()
                         .Where(p => p.PropertyType == typeof(DateTimeOffset));
 
@@ -42,12 +48,13 @@ namespace Infrastructure.Data
                         modelBuilder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
                     }
 
-                    //foreach (var property in dateTimeProperties)
-                    //{
-                    //    modelBuilder.Entity(entityType.Name).Property(property.Name)
-                    //        .HasConversion(new DateTimeOffsetToBinaryConverter());
-                    //}
+                    foreach (var property in dateTimeProperties)
+                    {
+                        modelBuilder.Entity(entityType.Name).Property(property.Name)
+                            .HasConversion(new DateTimeOffsetToBinaryConverter());
+                    }
                 }
+                //modelBuilder.Entity<ProductItemOrdered1>().HasNoKey();
             }
         }
 

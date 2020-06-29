@@ -99,7 +99,9 @@ namespace API.Controllers
 
                 List<string> colorName = new List<string>();
                 List<string> sizeName = new List<string>();
-                List<ImageToReturnDto> imageName = new List<ImageToReturnDto>();
+                List<ReviewDto> reviewList = new List<ReviewDto>();
+                List<ImageToReturnDto> imageList = new List<ImageToReturnDto>();
+                int ratingsCount = 0; int ratingsValue = 0;
 
                 var colors = await _context.Colors.Where(x => x.ItemId == id).ToListAsync();
                 if (colors.Count > 0)
@@ -129,7 +131,40 @@ namespace API.Controllers
                         img.small = (ApiUrl + elt.UrlSmall);
                         img.medium = (ApiUrl + elt.UrlMedium);
                         img.big = (ApiUrl + elt.UrlBig);
-                        imageName.Add(img);
+                        imageList.Add(img);
+                    }
+                }
+                var reviews = await _context.Reviews.Where(x => x.ItemId == id).ToListAsync();
+                if (reviews.Count > 0)
+                {
+                    elts.Review = reviews;
+                    foreach (var elt in elts.Review)
+                    {
+                        ReviewDto rev = new ReviewDto();
+                        rev.ReviewerName = elt.ReviewerName;
+                        rev.ReviewerPhoto = (ApiUrl + elt.ReviewerPhoto);
+                        rev.ReviewMessage = elt.ReviewMessage;
+                        rev.rate = elt.rate;
+                        if(elt.rate == 1)
+                        {
+                            rev.sentiment = "sentiment_very_dissatisfied";
+                        }
+                        else if (elt.rate == 2)
+                        {
+                            rev.sentiment = "sentiment_dissatisfied";
+                        }
+                        else if (elt.rate == 3 || elt.rate == 4)
+                        {
+                            rev.sentiment = "sentiment_satisfied";
+                        }
+                        else if (elt.rate == 5)
+                        {
+                            rev.sentiment = "sentiment_very_satisfied";
+                        }
+                        rev.ReviewDate = elt.ReviewDate;
+                        reviewList.Add(rev);
+                        ratingsCount++;
+                        ratingsValue += elt.rate;
                     }
                 }
 
@@ -141,14 +176,17 @@ namespace API.Controllers
                     OldPrice = elts.OldPrice,
                     NewPrice = elts.NewPrice,
                     Discount = elts.Discount,
-                    RatingsCount = elts.RatingsCount,
-                    RatingsValue = elts.RatingsValue,
+                    RatingsCount = ratingsCount,
+                    RatingsValue = ratingsValue,
                     availibilityCount = elts.availibilityCount,
                     cartCount = elts.cartCount,
+                    TechnicalDescription = elts.TechnicalDescription,
+                    AdditionalInformation = elts.AdditionalInformation,
                     Weight = elts.Weight,
                     Color = colorName,
                     Size = sizeName,
-                    Images = imageName,
+                    Images = imageList,
+                    Reviews = reviewList,
                     CategoryId = elts.Category.Id,
                     BrandName = elts.ProductBrand.Name
                 };
@@ -180,7 +218,9 @@ namespace API.Controllers
            
             List<string> colorName = new List<string>();
             List<string> sizeName = new List<string>();
-            List<ImageToReturnDto> imageName = new List<ImageToReturnDto>();
+            List<ReviewDto> reviewList = new List<ReviewDto>();
+            List<ImageToReturnDto> imageList = new List<ImageToReturnDto>();
+            int ratingsCount = 0; int ratingsValue = 0;
 
             var colors = await _context.Colors.Where(x => x.ItemId == id).ToListAsync();
             if (colors.Count > 0)
@@ -210,7 +250,40 @@ namespace API.Controllers
                     img.small = (ApiUrl + elt.UrlSmall);
                     img.medium = (ApiUrl + elt.UrlMedium);
                     img.big = (ApiUrl + elt.UrlBig);
-                    imageName.Add(img);
+                    imageList.Add(img);
+                }
+            }
+            var reviews = await _context.Reviews.Where(x => x.ItemId == id).ToListAsync();
+            if (reviews.Count > 0)
+            {
+                item.Review = reviews;
+                foreach (var elt in item.Review)
+                {
+                    ReviewDto rev = new ReviewDto();
+                    rev.ReviewerName = elt.ReviewerName;
+                    rev.ReviewerPhoto = (ApiUrl + elt.ReviewerPhoto);
+                    rev.ReviewMessage = elt.ReviewMessage;
+                    rev.rate = elt.rate;
+                    if (elt.rate == 1)
+                    {
+                        rev.sentiment = "sentiment_very_dissatisfied";
+                    }
+                    else if (elt.rate == 2)
+                    {
+                        rev.sentiment = "sentiment_dissatisfied";
+                    }
+                    else if (elt.rate == 3 || elt.rate == 4)
+                    {
+                        rev.sentiment = "sentiment_satisfied";
+                    }
+                    else if (elt.rate == 5)
+                    {
+                        rev.sentiment = "sentiment_very_satisfied";
+                    }
+                    rev.ReviewDate = elt.ReviewDate;
+                    reviewList.Add(rev);
+                    ratingsCount++;
+                    ratingsValue += elt.rate;
                 }
             }
 
@@ -222,13 +295,16 @@ namespace API.Controllers
                 OldPrice = item.OldPrice,
                 NewPrice = item.NewPrice,
                 Discount = item.Discount,
-                RatingsCount = item.RatingsCount,
-                RatingsValue = item.RatingsValue,
+                RatingsCount = ratingsCount,
+                RatingsValue = ratingsValue,
                 availibilityCount = item.availibilityCount,
                 cartCount = item.cartCount,
+                TechnicalDescription = item.TechnicalDescription,
+                AdditionalInformation = item.AdditionalInformation,
                 Color = colorName,
                 Size = sizeName,
-                Images = imageName,
+                Images = imageList,
+                Reviews = reviewList,
                 CategoryId = item.Category.Id,
                 BrandName = item.ProductBrand.Name
             };

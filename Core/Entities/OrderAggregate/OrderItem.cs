@@ -16,7 +16,7 @@ namespace Core.Entities.OrderAggregate
             Price = price;
             Quantity = quantity;
         }
-
+        //Snapshot of Item Ordered
         public ProductItemOrdered ItemOrdered { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }

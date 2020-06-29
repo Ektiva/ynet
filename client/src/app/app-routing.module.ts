@@ -9,13 +9,11 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 // import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'shop', component: ShopComponent },
-  { path: 'shop/:id', component: ProductDetailsComponent },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
   // { path: 'test-error', component: TestErrorComponent, data: { breadcrumb: 'Test Errors' } },
   // { path: 'server-error', component: ServerErrorComponent, data: { breadcrumb: 'Server Error' } },
   // { path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found' } },
-  // { path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), data: { breadcrumb: 'Shop' } },
+  { path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), data: { breadcrumb: 'Shop' } },
   // { path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule), data: { breadcrumb: 'Basket' } },
   // {
   //   path: 'checkout',

@@ -1,6 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20200628062444_OrderEntityTest.cs" />
+    <Compile Remove="Data\Migrations\20200628062444_OrderEntityTest.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200628063002_Order1EntityAdded.cs" />
+    <Compile Remove="Data\Migrations\20200628063002_Order1EntityAdded.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
       <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
       <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector" Version="2.14.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />

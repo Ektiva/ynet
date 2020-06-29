@@ -9,9 +9,15 @@ import { IProduct } from 'src/app/shared/models/product';
 export class ProductItemComponent implements OnInit {
   @Input() product: IProduct;
 
-  constructor() { }
+  constructor(
+    // private basketService: BasketService
+    ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  addItemToBasket() {
+    // this.basketService.addItemToBasket(this.product);
   }
 
 }

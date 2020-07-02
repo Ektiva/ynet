@@ -27,5 +27,7 @@ namespace API.Dtos
         public string BrandName { get; set; }
         public List<ImageToReturnDto> Images { get; set; }
         public List<ReviewDto> Reviews { get; set; }
+        public string CategoryName { get; set; }
+        public string PictureUrl { get; set; }
     }
 }

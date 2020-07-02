@@ -13,14 +13,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PagerComponent } from './components/pager/pager.component';
+import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
-    /*OrderTotalsComponent, 
-    TextInputComponent, 
-    StepperComponent, 
+    OrderTotalsComponent,
+    /*TextInputComponent,
+    StepperComponent,
   BasketSummaryComponent*/],
   imports: [
     CommonModule,
@@ -37,7 +38,7 @@ import { PagerComponent } from './components/pager/pager.component';
     PagingHeaderComponent,
     PagerComponent,
     CarouselModule,
-    // OrderTotalsComponent,
+    OrderTotalsComponent,
     ReactiveFormsModule,
     FormsModule,
     BsDropdownModule,

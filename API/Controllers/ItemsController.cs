@@ -188,7 +188,9 @@ namespace API.Controllers
                     Images = imageList,
                     Reviews = reviewList,
                     CategoryId = elts.Category.Id,
-                    BrandName = elts.ProductBrand.Name
+                    BrandName = elts.ProductBrand.Name,
+                    CategoryName = elts.Category.Name,
+                    PictureUrl = ApiUrl + elts.PictureUrl
                 };
                 itemsToReturns.Add(itemsToReturn);
             }
@@ -306,7 +308,9 @@ namespace API.Controllers
                 Images = imageList,
                 Reviews = reviewList,
                 CategoryId = item.Category.Id,
-                BrandName = item.ProductBrand.Name
+                BrandName = item.ProductBrand.Name,
+                CategoryName = item.Category.Name,
+                PictureUrl = ApiUrl + item.PictureUrl
             };
         }
 
@@ -314,10 +318,10 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands(int id)
         {
             var brandToReturn = await _productBrandRepo.ListAllAsync();
-            //foreach (var brand in brandToReturn)
-            //{
-            //    brand.ImageUrl = (ApiUrl + brand.ImageUrl);
-            //}
+            foreach (var brand in brandToReturn)
+            {
+                brand.ImageUrl = (ApiUrl + brand.ImageUrl);
+            }
             return Ok(brandToReturn);
         }
 

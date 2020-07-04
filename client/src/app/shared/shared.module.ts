@@ -14,15 +14,19 @@ import { RouterModule } from '@angular/router';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
     OrderTotalsComponent,
-    /*TextInputComponent,
-    StepperComponent,
-  BasketSummaryComponent*/],
+    TextInputComponent,
+    TextInputComponent,
+  //   StepperComponent,
+  // BasketSummaryComponent
+],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
@@ -30,6 +34,7 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
+    // BrowserAnimationsModule,
     /*CdkStepperModule,*/
     RouterModule
   ],
@@ -42,10 +47,10 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
     ReactiveFormsModule,
     FormsModule,
     BsDropdownModule,
-    /*TextInputComponent,
-    CdkStepperModule,
-    StepperComponent,
-    BasketSummaryComponent*/
+    TextInputComponent,
+    // CdkStepperModule,
+    // StepperComponent,
+    // BasketSummaryComponent
   ]
 })
 export class SharedModule { }

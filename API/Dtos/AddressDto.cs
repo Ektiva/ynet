@@ -25,5 +25,11 @@ namespace API.Dtos
 
         [Required]
         public string Zipcode { get; set; }
+
+        public string Company { get; set; }
+
+        public string MiddleName { get; set; }
+
+        public string Country { get; set; }
     }
 }

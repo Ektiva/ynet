@@ -7,8 +7,8 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 // import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // import { TextInputComponent } from './components/text-input/text-input.component';
-// import {CdkStepperModule} from '@angular/cdk/stepper';
-// import { StepperComponent } from './components/stepper/stepper.component';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import { StepperComponent } from './components/stepper/stepper.component';
 // import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { RouterModule } from '@angular/router';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
@@ -16,6 +16,7 @@ import { PagerComponent } from './components/pager/pager.component';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OrderTotalsComponent,
     TextInputComponent,
     TextInputComponent,
-  //   StepperComponent,
-  // BasketSummaryComponent
+    StepperComponent,
+    BasketSummaryComponent
 ],
   imports: [
     CommonModule,
@@ -35,7 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormsModule,
     // BrowserAnimationsModule,
-    /*CdkStepperModule,*/
+    CdkStepperModule,
     RouterModule
   ],
   exports: [
@@ -48,9 +49,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     BsDropdownModule,
     TextInputComponent,
-    // CdkStepperModule,
-    // StepperComponent,
-    // BasketSummaryComponent
+    CdkStepperModule,
+    StepperComponent,
+    BasketSummaryComponent
   ]
 })
 export class SharedModule { }

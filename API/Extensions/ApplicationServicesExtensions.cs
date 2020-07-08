@@ -20,11 +20,11 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderService1, OrderService1>();
-            // services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IPaymentService1, PaymentService1>();
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            //services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IBasketRepository<>), (typeof(BasketRepository<>)));
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 

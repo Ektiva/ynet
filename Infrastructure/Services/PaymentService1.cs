@@ -8,25 +8,25 @@ using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.Extensions.Configuration;
 using Stripe;
-using Order = Core.Entities.OrderAggregate.Order;
-using Product = Core.Entities.Product;
+using Order = Core.Entities.OrderAggregate.Order1;
+using Product = Core.Entities.Item;
 
 namespace Infrastructure.Services
 {
-    public class PaymentService : IPaymentService
+    public class PaymentService1 : IPaymentService1
     {
-        private readonly IBasketRepository<CustomerBasket> _basketRepository;
+        private readonly IBasketRepository<CustomerBasket1> _basketRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
 
-        public PaymentService(IBasketRepository<CustomerBasket> basketRepository, IUnitOfWork unitOfWork, IConfiguration config)
+        public PaymentService1(IBasketRepository<CustomerBasket1> basketRepository, IUnitOfWork unitOfWork, IConfiguration config)
         {
             _config = config;
             _basketRepository = basketRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId)
+        public async Task<CustomerBasket1> CreateOrUpdatePaymentIntent(string basketId)
         {
             //throw new NotImplementedException();
             StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
@@ -47,9 +47,9 @@ namespace Infrastructure.Services
             foreach (var item in basket.Items)
             {
                 var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
-                if (item.Price != productItem.Price)
+                if (item.Price != productItem.NewPrice)
                 {
-                    item.Price = productItem.Price;
+                    item.Price = productItem.NewPrice;
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Infrastructure.Services
             return basket;
         }
 
-        public async Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
+        public async Task<Order1> UpdateOrderPaymentFailed(string paymentIntentId)
         {
             throw new NotImplementedException();
             //var spec = new OrderByPaymentIntentIdSpecification(paymentIntentId);
@@ -97,7 +97,7 @@ namespace Infrastructure.Services
             //return order;
         }
 
-        public async Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId)
+        public async Task<Order1> UpdateOrderPaymentSucceeded(string paymentIntentId)
         {
             throw new NotImplementedException();
             //var spec = new OrderByPaymentIntentIdSpecification(paymentIntentId);
